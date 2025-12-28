@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Earthquake Risk Prediction Result</title>
+    <style>
+     body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://img.lovepik.com//photo/50038/8556.jpg_860.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .result-box {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        text-align: center;
+      }
+      h1 {
+        color: #333;
+        font-size: 36px;
+        text-align: center;
+        margin-top: 20px;
+      }
+      p {
+        color: #666;
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+      }
+      .high-risk {
+        color: red;
+        font-weight: bold;
+      }
+      .low-risk {
+        color: green;
+        font-weight: bold;
+      }
+      .warning {
+        font-size: 60px;
+        animation: blinker 1s linear infinite;
+      }
+      .warning-high {
+        color: red;
+      }
+      .warning-low {
+        color: yellow;
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+	ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        margin-top: 30px;
+      }
+       li {
+        color: red;
+  	  font-weight: bold;
+  	  border-bottom: 2px solid red;
+  	  padding-bottom: 10px;
+ 	  margin-bottom: 10px;
+      }
+	.box {
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 10px;
+	  
+  	  
+      }
+	.widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-blend-mode: multiply;
+}
+
+		.widget:hover {
+			transform: translateY(-10px);
+		}
+
+		.widget h1 {
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			text-align: center;
+			color: black;
+			text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		}
+
+		.widget img {
+			margin-bottom: 10px;
+			width: 80px;
+			height: 80px;
+		}
+
+		.widget p {
+			font-size: 18px;
+			margin-bottom: 5px;
+			text-align: center;
+			color: black;
+			text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		}
+    </style>
+  </head>
+  <body>
+	
+    <div class="result-box">
+      <h1>Earthquake Risk Prediction Result</h1>
+      <p>The earthquake risk for {{ location }} is {{ risk }}.</p>
+      <p>This location is <span class="{{ 'high-risk' if risk >= 6.0 else 'low-risk' }}">{{ 'high' if risk >= 6.0 else 'low' }} risk</span>.</p>
+      <div class="warning warning-{{ 'high' if risk >= 6.0 else 'low' }}">⚠️</div>
+	<div class="widget">
+		<h1>Weather in {{ location }}</h1>
+		<img src="" alt="" id="icon">
+		<p id="description"></p>
+		<p id="temperature"></p>
+	</div>
+
+	<script>
+		// Replace YOUR_API_KEY with your OpenWeatherMap API key
+		const apiKey = '41e4ebafc035e9fea686898b945c7338';
+
+		// Replace PARIS with the city you want to display weather for
+		const city = '{{ location }}';
+
+		// Build the API URL
+		const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+		// Fetch weather data from the API
+		fetch(apiUrl)
+			.then(response => response.json())
+			.then(data => {
+				// Extract the weather data we need from the response
+				const iconCode = data.weather[0].icon;
+				const description = data.weather[0].description;
+				const temperature = Math.round(data.main.temp - 273.15);
+
+				// Set the widget content
+				document.getElementById('icon').src = `http://openweathermap.org/img/w/${iconCode}.png`;
+				document.getElementById('icon').alt = description;
+				document.getElementById('description').textContent = description;
+				document.getElementById('temperature').textContent = `${temperature} °C`;
+			})
+			.catch(error => console.error(error));
+	</script>
+	<div class = "box">
+      <p>Drop! Cover! Hold On!</p>
+	<p>In most situations, you can protect yourself if you immediately:</p>
+      <ul>
+        <li>DROP down onto your hands and knees before the earthquake knocks you down. This position protects you from falling but allows you to still move if necessary.</li>
+        <li>COVER your head and neck (and your entire body if possible) underneath a sturdy table or desk. If there is no shelter nearby, get down near an interior wall or next to low-lying furniture that won’t fall on you, and cover your head and neck with your arms and hands.</li>
+        <li>HOLD on to your shelter (or to your head and neck) until the shaking stops. Be prepared to move with your shelter if the shaking shifts it around.</li>
+      </ul>
+      <img src="https://www.cdc.gov/disasters/earthquakes/images/DropCoverHoldOn-481px.png" alt="Drop, Cover, Hold On Infographic">
+	</div>
+    </div>
+  </body>
+</html>

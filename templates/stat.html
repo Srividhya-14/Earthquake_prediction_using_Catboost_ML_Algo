@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Recent Earthquakes</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		body {
+        		background-image: url("https://img.freepik.com/free-photo/pink-sky-background-with-crescent-moon_53876-129048.jpg?w=2000");
+        		background-repeat: no-repeat;
+        		background-size: cover;
+			}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<h1>Recent Earthquakes⚠️</h1>
+	<table id="earthquakes">
+		<thead>
+			<tr>
+				<th>Time</th>
+				<th>Location</th>
+				<th>Magnitude</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<script>
+		$(document).ready(function() {
+			var url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=now-2days&minmagnitude=4.5";
+			$.getJSON(url, function(data) {
+				$.each(data.features, function(index, earthquake) {
+					var time = new Date(earthquake.properties.time).toLocaleString();
+					var location = earthquake.properties.place;
+					var magnitude = earthquake.properties.mag;
+					$("#earthquakes tbody").append("<tr><td>" + time + "</td><td>" + location + "</td><td>" + magnitude + "</td></tr>");
+				});
+			});
+		});
+	</script>
+</body>
+</html>
+

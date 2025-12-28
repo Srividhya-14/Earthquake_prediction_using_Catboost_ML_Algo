@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Earthquake Prediction</title>
+    <style>
+      body {
+        background-image: url("https://www.preventionweb.net/sites/default/files/styles/landscape_16_9/public/2022-06/shutterstock_768461449-min.jpg?h=2cf907fb&itok=jIX68Mak");
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+      }
+      form {
+        margin-top: 10%;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      h1 {
+        color: white;
+        text-align: center;
+        margin-top: 5%;
+        font-size: 72px;
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        filter: brightness(0.6) contrast(1.2);
+      }
+      input[type=text] {
+        padding: 10px;
+        font-size: 24px;
+        border-radius: 5px;
+        border: none;
+        background-color: #f2f2f2;
+        width: 80%;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        color: #333;
+      }
+      button[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 36px;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s ease;
+      }
+      button[type=submit]:hover {
+        background-color: #3e8e41;
+      }
+      ::placeholder {
+        color: #999;
+      }
+	
+    </style>
+  </head>
+  <body>
+    <h1>PREDICT EARTHQUAKE</h1>
+    <form method="post" action="/predict">
+      <input type="text" name="location" placeholder="Enter a location">
+	<input type="text" name="phone" placeholder="Enter a phone no"
+      <br>
+      <button type="submit">Predict</button>
+	<button type="submit" formaction="/statistics">Statistics</button>
+	</form>
+  </body>
+</html>

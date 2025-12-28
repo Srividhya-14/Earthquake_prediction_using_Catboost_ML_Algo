@@ -5,3 +5,6 @@ The ability of Artificial Intelligence (AI)-based techniques to uncover buried p
 A machine learning model capable of predicting earthquakes must be able to predict the accurate location, magnitude spectrum and precise occurrence time and chances of occurrence so that it allows authorities to deploy resources, and shutdown devices which will cause major damage.
 
 So the prediction of earthquakes are highly beneficial and giving prior notifications to the people.
+
+
+DEMO Video - https://drive.google.com/file/d/1Fq9dh7lLxEtzy2RVDrFV-WM-1HN76h3y/view?usp=drive_link
